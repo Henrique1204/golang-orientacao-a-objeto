@@ -13,4 +13,9 @@ func main() {
 	primeiraConta := ContaCorrente{titular: "Paulo", numeroAgencia: 589, numeroConta: 123456, saldo: 323.45}
 
 	fmt.Println(primeiraConta)
+
+	var segundaConta *ContaCorrente
+	segundaConta = new(ContaCorrente)
+
+	fmt.Println(segundaConta)
 }
