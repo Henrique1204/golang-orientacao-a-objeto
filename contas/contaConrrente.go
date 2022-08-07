@@ -1,9 +1,11 @@
 package contas
 
-import "fmt"
+import (
+	"github.com/paulosouza/golang-orientacao-a-objeto/clientes"
+)
 
 type ContaCorrente struct {
-	Titular       string
+	Titular       clientes.Titular
 	NumeroAgencia int
 	NumeroConta   int
 	Saldo         float64
@@ -37,16 +39,12 @@ func (c *ContaCorrente) Transferir(valorDaTransferencia float64, contaDeDestino 
 	status, _ := c.Sacar(valorDaTransferencia)
 
 	if !status {
-		fmt.Println("Você não tem saldo suficiente para essa transferência!")
-
 		return status
 	}
 
 	status, _ = contaDeDestino.Depositar(valorDaTransferencia)
 
 	if !status {
-		fmt.Println("Ocorreu um erro ao depositar na conta de destino!")
-
 		c.Depositar(valorDaTransferencia)
 
 		return status
