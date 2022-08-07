@@ -8,19 +8,19 @@ type ContaCorrente struct {
 	Titular       clientes.Titular
 	NumeroAgencia int
 	NumeroConta   int
-	Saldo         float64
+	saldo         float64
 }
 
 func (c *ContaCorrente) Sacar(valorDoSaque float64) (bool, float64) {
 	const SAQUE_MINIMO = 0
 
-	podeSacar := valorDoSaque > SAQUE_MINIMO && valorDoSaque <= c.Saldo
+	podeSacar := valorDoSaque > SAQUE_MINIMO && valorDoSaque <= c.saldo
 
 	if podeSacar {
-		c.Saldo -= valorDoSaque
+		c.saldo -= valorDoSaque
 	}
 
-	return podeSacar, c.Saldo
+	return podeSacar, c.saldo
 }
 
 func (c *ContaCorrente) Depositar(valorDoDeposito float64) (bool, float64) {
@@ -29,10 +29,10 @@ func (c *ContaCorrente) Depositar(valorDoDeposito float64) (bool, float64) {
 	podeDepositar := valorDoDeposito > MINIMO_DEPOSITO
 
 	if podeDepositar {
-		c.Saldo += valorDoDeposito
+		c.saldo += valorDoDeposito
 	}
 
-	return podeDepositar, c.Saldo
+	return podeDepositar, c.saldo
 }
 
 func (c *ContaCorrente) Transferir(valorDaTransferencia float64, contaDeDestino *ContaCorrente) bool {
@@ -51,5 +51,8 @@ func (c *ContaCorrente) Transferir(valorDaTransferencia float64, contaDeDestino 
 	}
 
 	return status
+}
 
+func (c *ContaCorrente) ConsultarSaldo() float64 {
+	return c.saldo
 }
